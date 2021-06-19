@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { useState } from "react"
 import { Fragment } from "react"
 import { unpkgPathPlugin } from '../plugin'
-
+import { fetchPlugin } from '../plugin/fetch-plugin'
 
 
 const FormElements = () => {
@@ -34,11 +34,13 @@ const FormElements = () => {
       entryPoints: ['index.js'],
       bundle: true,
       write: false,
-      plugins: [unpkgPathPlugin()],
-      // define: {
-      //   'process.env.NODE_ENV': "prodduction",
-      //   global: 'window'
-      // }
+      plugins: [unpkgPathPlugin(),
+        fetchPlugin(input)
+      ],
+      define: {
+        "process.env.NODE_ENV": '"production"',
+        global: 'window'
+      }
     })
 
     // console.log(result)
